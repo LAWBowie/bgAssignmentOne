@@ -2,6 +2,7 @@
   "orgName": "lukebowman company",
   "edition": "Developer",
   "features": ["EnableSetPasswordInApi"],
+  "adminEmail": "lukebowman@brightgen.com",
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
