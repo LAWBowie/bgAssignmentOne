@@ -3,6 +3,31 @@
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Journey__c.Candidate_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Journey__c.Candidate_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Journey__c.Manager_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Journey__c.Manager_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Journey__c.Onboarding_Start_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Task__c.Completed__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -27,11 +52,23 @@
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
+        <layout>Journey__c-Journey Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Task__c-Task Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Template__c-Template Layout</layout>
     </layoutAssignments>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Journey__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
