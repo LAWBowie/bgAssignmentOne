@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Represents the onboarding process for each individual candidate at MainlyDigital. It serves as a comprehensive track of tasks and their respective completion statuses for each candidate throughout their onboarding phase.</description>
+    <description>Journeys track the onboarding process of individual candidates. Each journey can be associated with multiple tasks, either manually entered or derived from a template.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>

@@ -61,7 +61,6 @@
         <fields>NAME</fields>
         <fields>Description__c</fields>
         <fields>Days__c</fields>
-        <fields>Estimated_Completion_Date__c</fields>
         <fields>Completed__c</fields>
         <relatedList>Task__c.Template__c</relatedList>
     </relatedLists>

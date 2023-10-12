@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>This SObject represents the template for different roles that MainlyDigital offers.</description>
+    <description>Templates represent the predefined onboarding process for different roles at MainlyDigital. They consist of a set of standard tasks that need to be completed by new employees as part of their onboarding process.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>

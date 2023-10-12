@@ -4,7 +4,7 @@
     <description>Email address for the candidate.</description>
     <externalId>false</externalId>
     <label>Candidate Email</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Email</type>
     <unique>false</unique>

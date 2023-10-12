@@ -5,7 +5,7 @@
     <description>The start date of the candidates onboarding.</description>
     <externalId>false</externalId>
     <label>Onboarding Start Date</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>

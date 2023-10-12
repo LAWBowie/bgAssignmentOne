@@ -25,10 +25,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Days__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Journey__c</field>
             </layoutItems>
         </layoutColumns>
@@ -40,6 +36,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Estimated_Completion_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Days__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

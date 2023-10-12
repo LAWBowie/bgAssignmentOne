@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Journey__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <description>This field links a task to its associated journey.</description>
+    <description>Lookup relationship linking the task to a specific onboarding journey.</description>
     <externalId>false</externalId>
     <label>Associated Journey</label>
     <referenceTo>Journey__c</referenceTo>
