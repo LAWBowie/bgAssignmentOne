@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Tasks represent individual actions or steps in the onboarding process, which are associated with Journeys.</description>
+    <description>Represents a predefined task that is associated with a template. These tasks serve as a blueprint for the tasks that should be completed as part of an onboarding process.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -153,14 +153,14 @@
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
-    <label>Journey Task</label>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <label>Template Task</label>
     <nameField>
-        <label>Journey Task Name</label>
+        <label>Template Task Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Journey Tasks</pluralLabel>
+    <pluralLabel>Template Tasks</pluralLabel>
     <searchLayouts></searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

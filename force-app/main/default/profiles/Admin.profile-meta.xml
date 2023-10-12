@@ -28,12 +28,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Task__c.Template__c</field>
+        <field>Template_Task__c.Task_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Template__c.Role__c</field>
+        <field>Template_Task__c.Task_Relative_Days_To_Complete__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
@@ -41,6 +41,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Task__c-Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Template_Task__c-Template Task Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Template__c-Template Layout</layout>
@@ -69,6 +72,15 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
+        <object>Template_Task__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
         <object>Template__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -78,6 +90,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Task__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Template_Task__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>

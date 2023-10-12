@@ -3,7 +3,7 @@
     <fullName>Estimated_Completion_Date__c</fullName>
     <description>Estimated Completion date is calculated by adding the onboarding start date and relative days to complete fields.</description>
     <externalId>false</externalId>
-    <formula>Journey__r.Onboarding_Start_Date__c + Days__c</formula>
+    <formula>Journey__r.Onboarding_Start_Date__c + Relative_Days_To_Complete__c</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Estimated Completion Date</label>
     <required>false</required>

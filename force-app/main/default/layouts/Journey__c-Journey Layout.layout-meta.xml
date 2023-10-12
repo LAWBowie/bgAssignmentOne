@@ -71,8 +71,10 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Description__c</fields>
         <fields>Estimated_Completion_Date__c</fields>
         <fields>Completion_Status__c</fields>
+        <fields>Completed__c</fields>
         <relatedList>Task__c.Journey__c</relatedList>
         <sortField>Estimated_Completion_Date__c</sortField>
         <sortOrder>Asc</sortOrder>
