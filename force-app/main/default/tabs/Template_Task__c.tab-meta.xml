@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObject>true</customObject>
+    <description>A predefined set of activities or steps designed to serve as a blueprint for onboarding tasks.</description>
+    <motif>Custom62: Chalkboard</motif>
+</CustomTab>
