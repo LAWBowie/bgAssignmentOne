@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Designed for new joiners to the company. This permission set enables candidates to access and progress through their specific onboarding journey.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Candidate Journey Access</label>
+</PermissionSet>
