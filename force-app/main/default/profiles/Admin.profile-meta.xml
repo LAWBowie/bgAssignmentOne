@@ -23,11 +23,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Task__c.Journey__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Template_Task__c.Task_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
