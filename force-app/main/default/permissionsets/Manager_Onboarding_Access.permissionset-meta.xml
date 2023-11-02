@@ -74,6 +74,10 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
+        <tab>Template_Task__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>Template__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
