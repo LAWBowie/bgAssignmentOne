@@ -4,7 +4,7 @@
         <application>Mainly_Digital</application>
         <visible>true</visible>
     </applicationVisibilities>
-    <description>Designed for new joiners to the company. This permission set enables candidates to access and progress through their specific onboarding journey by completing necessary Journey Tasks.</description>
+    <description>Designed for Mainly Digital new joiners. This permission set enables candidates to access and progress through their specific onboarding journey by completing necessary Journey Tasks.</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Task__c.Completed__c</field>

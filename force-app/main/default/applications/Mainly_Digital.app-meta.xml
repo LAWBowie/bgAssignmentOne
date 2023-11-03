@@ -13,9 +13,7 @@
     <label>Mainly Digital</label>
     <navType>Standard</navType>
     <tabs>Template__c</tabs>
-    <tabs>Template_Task__c</tabs>
     <tabs>Journey__c</tabs>
-    <tabs>Task__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Mainly_Digital_UtilityBar</utilityBar>
 </CustomApplication>
