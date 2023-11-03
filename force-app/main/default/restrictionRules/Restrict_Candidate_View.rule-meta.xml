@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RestrictionRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <description>Ensure candidates can only see Journeys that involve them.</description>
+    <enforcementType>Restrict</enforcementType>
+    <masterLabel>Restrict Candidate View</masterLabel>
+    <recordFilter>Candidate_Email__c=$User.Email</recordFilter>
+    <targetEntity>Journey__c</targetEntity>
+    <userCriteria>$User.Title=&apos;Onboarding Candidate&apos;</userCriteria>
+    <version>1</version>
+</RestrictionRule>
