@@ -4,7 +4,7 @@
         <application>Mainly_Digital</application>
         <visible>true</visible>
     </applicationVisibilities>
-    <description>Comprehensive access for Mainly Digital IT staff who need capability to create and edit Templates and Journeys, as well as troubleshoot any issues related to candidates, the onboarding application, or Salesforce itself.</description>
+    <description>Comprehensive access for Mainly Digital IT staff who need capability to create and edit Templates and Journeys, as well as troubleshoot any issues related to candidates or the onboarding application.</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Task__c.Completed__c</field>
@@ -75,14 +75,6 @@
     </objectPermissions>
     <tabSettings>
         <tab>Journey__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>Task__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>Template_Task__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
