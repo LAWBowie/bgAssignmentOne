@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>59.0</apiVersion>
+    <assignments>
+        <description>Assigns the user&apos;s edits in the screen flow to the respective fields in the current Template Task.</description>
+        <name>Capture_Task_Edits</name>
+        <label>Capture Task Edits</label>
+        <locationX>142</locationX>
+        <locationY>578</locationY>
+        <assignmentItems>
+            <assignToReference>varCurrentTemplateTask.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Task_Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCurrentTemplateTask.Task_Description__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Task_Description</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCurrentTemplateTask.Task_Relative_Days_To_Complete__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Relative_Days_to_Complete</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Save_Template_Task_Edits</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <name>Edit_Tasks</name>
         <label>Edit Tasks?</label>
@@ -27,6 +58,14 @@
         </rules>
     </decisions>
     <description>Screen to capture essential details for creating a new Journey.</description>
+    <dynamicChoiceSets>
+        <description>Provides a list of existing templates for the user to choose from.</description>
+        <name>SelectedTemplate</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <object>Template__c</object>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
     <environments>Default</environments>
     <interviewLabel>Enter Journey Details {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Enter Journey Details</label>
@@ -38,6 +77,9 @@
         <locationY>339</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Edit_Current_Template_Task</targetReference>
+        </nextValueConnector>
     </loops>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -59,11 +101,19 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
+        <description>Creates new Journey Task records based on the edited Template Tasks.</description>
+        <name>Create_Journey_Tasks_from_Template</name>
+        <label>Create Journey Tasks from Template</label>
+        <locationX>142</locationX>
+        <locationY>1013</locationY>
+        <inputReference>colTemplateTasks</inputReference>
+    </recordCreates>
+    <recordCreates>
         <description>This element creates a new Journey record using the details provided by the user, such as the Journey Name, Candidate Information, Manager Information, and Onboarding Start Date, linking it to the Template from which the Flow was launched.</description>
         <name>Create_New_Journey</name>
         <label>Create New Journey</label>
-        <locationX>774</locationX>
-        <locationY>600</locationY>
+        <locationX>775</locationX>
+        <locationY>966</locationY>
         <inputAssignments>
             <field>Candidate_Email__c</field>
             <value>
@@ -134,6 +184,53 @@
         <queriedFields>Task_Description__c</queriedFields>
         <queriedFields>Task_Relative_Days_To_Complete__c</queriedFields>
     </recordLookups>
+    <recordUpdates>
+        <description>Saves the changes made to the current Template Task back to Salesforce.</description>
+        <name>Save_Template_Task_Edits</name>
+        <label>Save Template Task Edits</label>
+        <locationX>142</locationX>
+        <locationY>821</locationY>
+        <connector>
+            <targetReference>Create_Journey_Tasks_from_Template</targetReference>
+        </connector>
+        <inputReference>varCurrentTemplateTask</inputReference>
+    </recordUpdates>
+    <screens>
+        <description>Displays the details of the current Template Task for the user to edit.</description>
+        <name>Edit_Current_Template_Task</name>
+        <label>Edit Current Template Task</label>
+        <locationX>142</locationX>
+        <locationY>339</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Capture_Task_Edits</targetReference>
+        </connector>
+        <fields>
+            <name>Task_Name</name>
+            <dataType>String</dataType>
+            <fieldText>Task Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Task_Description</name>
+            <fieldText>Task Description</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Relative_Days_to_Complete</name>
+            <dataType>Number</dataType>
+            <fieldText>Relative Days to Complete</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
     <screens>
         <description>Enter the related Journey details.</description>
         <name>Enter_Journey_Details</name>
@@ -288,11 +385,19 @@
         <objectType>Task__c</objectType>
     </variables>
     <variables>
+        <description>Stores the selected Template ID for use in the flow.</description>
+        <name>varTemplateId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
         <description>Holds the current Template record data.</description>
         <name>varTemplateRecord</name>
         <dataType>SObject</dataType>
         <isCollection>false</isCollection>
-        <isInput>false</isInput>
+        <isInput>true</isInput>
         <isOutput>false</isOutput>
         <objectType>Template__c</objectType>
     </variables>

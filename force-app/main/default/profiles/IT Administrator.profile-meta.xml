@@ -54,6 +54,10 @@
         <layout>Template__c-Template Layout</layout>
     </layoutAssignments>
     <tabVisibilities>
+        <tab>Create_Journey_from_Template</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Journey__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
