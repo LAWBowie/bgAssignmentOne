@@ -27,6 +27,10 @@
                 <behavior>Required</behavior>
                 <field>Manager_Email__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Template_Used__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

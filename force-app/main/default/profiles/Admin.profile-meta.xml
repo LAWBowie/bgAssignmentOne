@@ -8,6 +8,11 @@
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Journey__c.Template_Used__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Task__c.Completed__c</field>
         <readable>true</readable>
     </fieldPermissions>
