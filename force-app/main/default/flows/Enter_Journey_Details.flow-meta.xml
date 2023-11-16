@@ -5,8 +5,8 @@
         <description>Assigns the user&apos;s edits in the screen flow to the respective fields in the current Template Task.</description>
         <name>Capture_Task_Edits</name>
         <label>Capture Task Edits</label>
-        <locationX>142</locationX>
-        <locationY>578</locationY>
+        <locationX>103</locationX>
+        <locationY>531</locationY>
         <assignmentItems>
             <assignToReference>varCurrentTemplateTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -58,14 +58,6 @@
         </rules>
     </decisions>
     <description>Screen to capture essential details for creating a new Journey.</description>
-    <dynamicChoiceSets>
-        <description>Provides a list of existing templates for the user to choose from.</description>
-        <name>SelectedTemplate</name>
-        <dataType>String</dataType>
-        <displayField>Name</displayField>
-        <object>Template__c</object>
-        <valueField>Id</valueField>
-    </dynamicChoiceSets>
     <environments>Default</environments>
     <interviewLabel>Enter Journey Details {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Enter Journey Details</label>
@@ -73,13 +65,16 @@
         <description>Loop element to go through each element in the collection.</description>
         <name>Task_Loop</name>
         <label>Task Loop</label>
-        <locationX>323</locationX>
+        <locationX>319</locationX>
         <locationY>339</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>Edit_Current_Template_Task</targetReference>
         </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Capture_Task_Edits</targetReference>
+        </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -104,16 +99,16 @@
         <description>Creates new Journey Task records based on the edited Template Tasks.</description>
         <name>Create_Journey_Tasks_from_Template</name>
         <label>Create Journey Tasks from Template</label>
-        <locationX>142</locationX>
-        <locationY>1013</locationY>
+        <locationX>102</locationX>
+        <locationY>975</locationY>
         <inputReference>colTemplateTasks</inputReference>
     </recordCreates>
     <recordCreates>
         <description>This element creates a new Journey record using the details provided by the user, such as the Journey Name, Candidate Information, Manager Information, and Onboarding Start Date, linking it to the Template from which the Flow was launched.</description>
         <name>Create_New_Journey</name>
         <label>Create New Journey</label>
-        <locationX>775</locationX>
-        <locationY>966</locationY>
+        <locationX>776</locationX>
+        <locationY>774</locationY>
         <inputAssignments>
             <field>Candidate_Email__c</field>
             <value>
@@ -171,7 +166,7 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>Id</field>
+            <field>Template__c</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>varTemplateRecord.Id</elementReference>
@@ -188,8 +183,8 @@
         <description>Saves the changes made to the current Template Task back to Salesforce.</description>
         <name>Save_Template_Task_Edits</name>
         <label>Save Template Task Edits</label>
-        <locationX>142</locationX>
-        <locationY>821</locationY>
+        <locationX>102</locationX>
+        <locationY>771</locationY>
         <connector>
             <targetReference>Create_Journey_Tasks_from_Template</targetReference>
         </connector>
@@ -199,8 +194,8 @@
         <description>Displays the details of the current Template Task for the user to edit.</description>
         <name>Edit_Current_Template_Task</name>
         <label>Edit Current Template Task</label>
-        <locationX>142</locationX>
-        <locationY>339</locationY>
+        <locationX>318</locationX>
+        <locationY>532</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -383,14 +378,6 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Task__c</objectType>
-    </variables>
-    <variables>
-        <description>Stores the selected Template ID for use in the flow.</description>
-        <name>varTemplateId</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
     </variables>
     <variables>
         <description>Holds the current Template record data.</description>
