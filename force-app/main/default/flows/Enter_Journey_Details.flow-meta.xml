@@ -5,8 +5,8 @@
         <description>Assigns the user&apos;s edits in the screen flow to the respective fields in the current Template Task.</description>
         <name>Capture_Task_Edits</name>
         <label>Capture Task Edits</label>
-        <locationX>103</locationX>
-        <locationY>531</locationY>
+        <locationX>156</locationX>
+        <locationY>782</locationY>
         <assignmentItems>
             <assignToReference>varCurrentTemplateTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -29,32 +29,33 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Save_Template_Task_Edits</targetReference>
+            <targetReference>Task_Loop</targetReference>
         </connector>
     </assignments>
     <decisions>
+        <description>Decision element with 2 paths depending on whether the user checked the &quot;edit template tasks&quot; checkbox</description>
         <name>Edit_Tasks</name>
         <label>Edit Tasks?</label>
-        <locationX>768</locationX>
-        <locationY>350</locationY>
+        <locationX>176</locationX>
+        <locationY>458</locationY>
         <defaultConnector>
-            <targetReference>Create_New_Journey</targetReference>
+            <targetReference>Create_Journey_Tasks_from_Template</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Do not Edit Tasks</defaultConnectorLabel>
+        <defaultConnectorLabel>No Edit</defaultConnectorLabel>
         <rules>
-            <name>Edit_Tasks_Outcome</name>
+            <name>Yes_Edit</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Edit_Tasks_before_creating_Journey</leftValueReference>
+                <leftValueReference>Edit_Template_Tasks</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Get_Related_Template_Tasks</targetReference>
+                <targetReference>Task_Loop</targetReference>
             </connector>
-            <label>Edit Tasks</label>
+            <label>Yes Edit</label>
         </rules>
     </decisions>
     <description>Screen to capture essential details for creating a new Journey.</description>
@@ -65,15 +66,15 @@
         <description>Loop element to go through each element in the collection.</description>
         <name>Task_Loop</name>
         <label>Task Loop</label>
-        <locationX>319</locationX>
-        <locationY>339</locationY>
+        <locationX>68</locationX>
+        <locationY>566</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>Edit_Current_Template_Task</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Capture_Task_Edits</targetReference>
+            <targetReference>Create_Journey_Tasks_from_Template</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -85,7 +86,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -99,16 +100,19 @@
         <description>Creates new Journey Task records based on the edited Template Tasks.</description>
         <name>Create_Journey_Tasks_from_Template</name>
         <label>Create Journey Tasks from Template</label>
-        <locationX>102</locationX>
-        <locationY>975</locationY>
+        <locationX>176</locationX>
+        <locationY>1058</locationY>
+        <connector>
+            <targetReference>Create_New_Journey</targetReference>
+        </connector>
         <inputReference>colTemplateTasks</inputReference>
     </recordCreates>
     <recordCreates>
         <description>This element creates a new Journey record using the details provided by the user, such as the Journey Name, Candidate Information, Manager Information, and Onboarding Start Date, linking it to the Template from which the Flow was launched.</description>
         <name>Create_New_Journey</name>
         <label>Create New Journey</label>
-        <locationX>776</locationX>
-        <locationY>774</locationY>
+        <locationX>176</locationX>
+        <locationY>1166</locationY>
         <inputAssignments>
             <field>Candidate_Email__c</field>
             <value>
@@ -148,7 +152,7 @@
         <inputAssignments>
             <field>Template_Used__c</field>
             <value>
-                <elementReference>varTemplateRecord.Id</elementReference>
+                <elementReference>recordId</elementReference>
             </value>
         </inputAssignments>
         <object>Journey__c</object>
@@ -158,18 +162,18 @@
         <description>Retrieve all the Task records that are related to the selected template to be used in the creation of the Journey.</description>
         <name>Get_Related_Template_Tasks</name>
         <label>Get Related Template Tasks</label>
-        <locationX>507</locationX>
-        <locationY>340</locationY>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Task_Loop</targetReference>
+            <targetReference>Enter_Journey_Details</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Template__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>varTemplateRecord.Id</elementReference>
+                <elementReference>recordId</elementReference>
             </value>
         </filters>
         <object>Template_Task__c</object>
@@ -178,24 +182,36 @@
         <queriedFields>Name</queriedFields>
         <queriedFields>Task_Description__c</queriedFields>
         <queriedFields>Task_Relative_Days_To_Complete__c</queriedFields>
+        <queriedFields>Template__c</queriedFields>
     </recordLookups>
-    <recordUpdates>
-        <description>Saves the changes made to the current Template Task back to Salesforce.</description>
-        <name>Save_Template_Task_Edits</name>
-        <label>Save Template Task Edits</label>
-        <locationX>102</locationX>
-        <locationY>771</locationY>
+    <recordLookups>
+        <description>Get the current Template Record</description>
+        <name>Get_Template</name>
+        <label>Get Template</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Create_Journey_Tasks_from_Template</targetReference>
+            <targetReference>Get_Related_Template_Tasks</targetReference>
         </connector>
-        <inputReference>varCurrentTemplateTask</inputReference>
-    </recordUpdates>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Template__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <description>Displays the details of the current Template Task for the user to edit.</description>
         <name>Edit_Current_Template_Task</name>
         <label>Edit Current Template Task</label>
-        <locationX>318</locationX>
-        <locationY>532</locationY>
+        <locationX>156</locationX>
+        <locationY>674</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -230,8 +246,8 @@
         <description>Enter the related Journey details.</description>
         <name>Enter_Journey_Details</name>
         <label>Enter Journey Details</label>
-        <locationX>776</locationX>
-        <locationY>182</locationY>
+        <locationX>176</locationX>
+        <locationY>350</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -295,24 +311,20 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>Edit_Tasks_before_creating_Journey</name>
+            <name>Edit_Template_Tasks</name>
             <dataType>Boolean</dataType>
-            <defaultValue>
-                <elementReference>varEditTasks</elementReference>
-            </defaultValue>
-            <fieldText>Edit Tasks before creating Journey?</fieldText>
+            <fieldText>Edit Template Tasks?</fieldText>
             <fieldType>InputField</fieldType>
-            <helpText>&lt;p&gt;Select this option if you want to edit the related Template Tasks before creating the Journey.&lt;/p&gt;</helpText>
             <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>650</locationX>
-        <locationY>50</locationY>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
         <connector>
-            <targetReference>Enter_Journey_Details</targetReference>
+            <targetReference>Get_Template</targetReference>
         </connector>
     </start>
     <status>Draft</status>
@@ -324,6 +336,13 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Template_Task__c</objectType>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <description>Stores the current Template Task records data during the loop for editing before creating Journey Tasks.</description>
@@ -360,32 +379,5 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <description>Stores the details of the new Journey being created from the template.</description>
-        <name>varNewJourney</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Journey__c</objectType>
-    </variables>
-    <variables>
-        <description>Used to create new Journey Task records from Template tasks during the loop.</description>
-        <name>varNewJourneyTask</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Task__c</objectType>
-    </variables>
-    <variables>
-        <description>Holds the current Template record data.</description>
-        <name>varTemplateRecord</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Template__c</objectType>
     </variables>
 </Flow>
