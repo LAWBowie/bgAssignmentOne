@@ -2,11 +2,65 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>59.0</apiVersion>
     <assignments>
+        <description>Add the edited values into a new collection variable.</description>
+        <name>add_To_New_Collection</name>
+        <label>add To New Collection</label>
+        <locationX>138</locationX>
+        <locationY>1106</locationY>
+        <assignmentItems>
+            <assignToReference>colJourneyTasks</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varEditedJourneyTask</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Task_Loop</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Task_Details_To_Journey_Task</name>
+        <label>Assign Task Details To Journey Task</label>
+        <locationX>138</locationX>
+        <locationY>998</locationY>
+        <assignmentItems>
+            <assignToReference>varEditedJourneyTask.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varCurrentTemplateTask.Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varEditedJourneyTask.Description__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varCurrentTemplateTask.Task_Description__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varEditedJourneyTask.Relative_Days_To_Complete__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varCurrentTemplateTask.Task_Relative_Days_To_Complete__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varEditedJourneyTask.Journey__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Create_New_Journey</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>add_To_New_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <description>Assigns the user&apos;s edits in the screen flow to the respective fields in the current Template Task.</description>
         <name>Capture_Task_Edits</name>
         <label>Capture Task Edits</label>
         <locationX>138</locationX>
-        <locationY>782</locationY>
+        <locationY>890</locationY>
         <assignmentItems>
             <assignToReference>varCurrentTemplateTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -28,18 +82,25 @@
                 <elementReference>Relative_Days_to_Complete</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCurrentTemplateTask.Template__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Task_Loop.Template__c</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
-            <targetReference>Task_Loop</targetReference>
+            <targetReference>Assign_Task_Details_To_Journey_Task</targetReference>
         </connector>
     </assignments>
     <decisions>
         <description>Decision element with 2 paths depending on whether the user checked the &quot;edit template tasks&quot; checkbox</description>
         <name>Edit_Tasks</name>
         <label>Edit Tasks?</label>
-        <locationX>182</locationX>
-        <locationY>458</locationY>
+        <locationX>226</locationX>
+        <locationY>566</locationY>
         <defaultConnector>
-            <targetReference>Copy_1_of_Create_New_Journey</targetReference>
+            <targetReference>Unchanged_Task_Loop</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No Edit</defaultConnectorLabel>
         <rules>
@@ -67,14 +128,25 @@
         <name>Task_Loop</name>
         <label>Task Loop</label>
         <locationX>50</locationX>
-        <locationY>566</locationY>
+        <locationY>674</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>Edit_Current_Template_Task</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Update_Edited_Tasks</targetReference>
+            <targetReference>Create_Journey_Tasks_from_Template</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Unchanged_Task_Loop</name>
+        <label>Unchanged Task Loop</label>
+        <locationX>402</locationX>
+        <locationY>674</locationY>
+        <collectionReference>colTemplateTasks</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <noMoreValuesConnector>
+            <targetReference>Create_Unedited_Journey_Tasks</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -97,75 +169,21 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
-        <description>This element creates a new Journey record using the details provided by the user, such as the Journey Name, Candidate Information, Manager Information, and Onboarding Start Date, linking it to the Template from which the Flow was launched.</description>
-        <name>Copy_1_of_Create_New_Journey</name>
-        <label>Copy 1 of Create New Journey</label>
-        <locationX>314</locationX>
-        <locationY>566</locationY>
-        <connector>
-            <targetReference>Create_Unedited_Journey_Tasks</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>Candidate_Email__c</field>
-            <value>
-                <elementReference>Candidate_Email.value</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Candidate_Name__c</field>
-            <value>
-                <elementReference>Candidate_Name</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Manager_Email__c</field>
-            <value>
-                <elementReference>Manager_Email.value</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Manager_Name__c</field>
-            <value>
-                <elementReference>Manager_Name</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Name</field>
-            <value>
-                <elementReference>Journey_Name</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Onboarding_Start_Date__c</field>
-            <value>
-                <elementReference>Onboarding_Start_Date</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Template_Used__c</field>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Journey__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordCreates>
-    <recordCreates>
         <description>Creates new Journey Task records based on the edited Template Tasks.</description>
         <name>Create_Journey_Tasks_from_Template</name>
         <label>Create Journey Tasks from Template</label>
         <locationX>50</locationX>
-        <locationY>1190</locationY>
-        <inputReference>colTemplateTasks</inputReference>
+        <locationY>1298</locationY>
+        <inputReference>colJourneyTasks</inputReference>
     </recordCreates>
     <recordCreates>
         <description>This element creates a new Journey record using the details provided by the user, such as the Journey Name, Candidate Information, Manager Information, and Onboarding Start Date, linking it to the Template from which the Flow was launched.</description>
         <name>Create_New_Journey</name>
         <label>Create New Journey</label>
-        <locationX>50</locationX>
-        <locationY>1082</locationY>
+        <locationX>226</locationX>
+        <locationY>458</locationY>
         <connector>
-            <targetReference>Create_Journey_Tasks_from_Template</targetReference>
+            <targetReference>Edit_Tasks</targetReference>
         </connector>
         <inputAssignments>
             <field>Candidate_Email__c</field>
@@ -216,15 +234,15 @@
         <description>Create Journey Tasks from an existing template, making no changes.</description>
         <name>Create_Unedited_Journey_Tasks</name>
         <label>Create Unedited Journey Tasks</label>
-        <locationX>314</locationX>
-        <locationY>674</locationY>
+        <locationX>402</locationX>
+        <locationY>866</locationY>
         <inputReference>colTemplateTasks</inputReference>
     </recordCreates>
     <recordLookups>
         <description>Retrieve all the Task records that are related to the selected template to be used in the creation of the Journey.</description>
         <name>Get_Related_Template_Tasks</name>
         <label>Get Related Template Tasks</label>
-        <locationX>182</locationX>
+        <locationX>226</locationX>
         <locationY>242</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -250,7 +268,7 @@
         <description>Get the current Template Record</description>
         <name>Get_Template</name>
         <label>Get Template</label>
-        <locationX>182</locationX>
+        <locationX>226</locationX>
         <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -268,23 +286,12 @@
         <object>Template__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <recordUpdates>
-        <description>Update collection with edited tasks.</description>
-        <name>Update_Edited_Tasks</name>
-        <label>Update Edited Tasks</label>
-        <locationX>50</locationX>
-        <locationY>974</locationY>
-        <connector>
-            <targetReference>Create_New_Journey</targetReference>
-        </connector>
-        <inputReference>colTemplateTasks</inputReference>
-    </recordUpdates>
     <screens>
         <description>Displays the details of the current Template Task for the user to edit.</description>
         <name>Edit_Current_Template_Task</name>
         <label>Edit Current Template Task</label>
         <locationX>138</locationX>
-        <locationY>674</locationY>
+        <locationY>782</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -328,13 +335,13 @@
         <description>Enter the related Journey details.</description>
         <name>Enter_Journey_Details</name>
         <label>Enter Journey Details</label>
-        <locationX>182</locationX>
+        <locationX>226</locationX>
         <locationY>350</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Edit_Tasks</targetReference>
+            <targetReference>Create_New_Journey</targetReference>
         </connector>
         <fields>
             <name>Journey_Name</name>
@@ -403,13 +410,37 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>56</locationX>
+        <locationX>100</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Template</targetReference>
         </connector>
     </start>
     <status>Draft</status>
+    <variables>
+        <name>colJourneyTasks</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task__c</objectType>
+    </variables>
+    <variables>
+        <description>Store the edited Journey Tasks</description>
+        <name>colNewJourneyTask</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>colNewTasks</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Template_Task__c</objectType>
+    </variables>
     <variables>
         <description>Holds the collection of template task records related to the selected template.</description>
         <name>colTemplateTasks</name>
@@ -434,6 +465,14 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Template_Task__c</objectType>
+    </variables>
+    <variables>
+        <name>varEditedJourneyTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task__c</objectType>
     </variables>
     <variables>
         <description>Indicates whether the user wants to edit tasks before creating a Journey.</description>
