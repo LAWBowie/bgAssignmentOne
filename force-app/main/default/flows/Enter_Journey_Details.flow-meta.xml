@@ -3,8 +3,8 @@
     <apiVersion>59.0</apiVersion>
     <assignments>
         <description>Add the edited values into a new collection variable.</description>
-        <name>add_To_New_Collection</name>
-        <label>add To New Collection</label>
+        <name>Add_To_New_Collection</name>
+        <label>Add To New Collection</label>
         <locationX>138</locationX>
         <locationY>1106</locationY>
         <assignmentItems>
@@ -16,6 +16,22 @@
         </assignmentItems>
         <connector>
             <targetReference>Task_Loop</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_To_New_Unedited_Collection</name>
+        <label>Add To New Unedited Collection</label>
+        <locationX>490</locationX>
+        <locationY>998</locationY>
+        <assignmentItems>
+            <assignToReference>colUneditedJourneyTasks</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varUneditedJourneyTask</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Unchanged_Task_Loop</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -52,7 +68,81 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>add_To_New_Collection</targetReference>
+            <targetReference>Add_To_New_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Unedited_Details_To_Journey_Task</name>
+        <label>Assign Unedited Details To Journey Task</label>
+        <locationX>490</locationX>
+        <locationY>890</locationY>
+        <assignmentItems>
+            <assignToReference>varUneditedJourneyTask.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varCurrentUneditedTemplateTask.Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varUneditedJourneyTask.Description__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varCurrentUneditedTemplateTask.Task_Description__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varUneditedJourneyTask.Relative_Days_To_Complete__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varCurrentUneditedTemplateTask.Task_Relative_Days_To_Complete__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varUneditedJourneyTask.Journey__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Create_New_Journey</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_To_New_Unedited_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Unedited_Task_Details</name>
+        <label>Assign Unedited Task Details</label>
+        <locationX>490</locationX>
+        <locationY>782</locationY>
+        <assignmentItems>
+            <assignToReference>varCurrentUneditedTemplateTask.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Unchanged_Task_Loop.Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCurrentUneditedTemplateTask.Task_Description__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Unchanged_Task_Loop.Task_Description__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCurrentUneditedTemplateTask.Task_Relative_Days_To_Complete__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Unchanged_Task_Loop.Task_Relative_Days_To_Complete__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCurrentUneditedTemplateTask.Template__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Unchanged_Task_Loop.Template__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Unedited_Details_To_Journey_Task</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -145,6 +235,9 @@
         <locationY>674</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_Unedited_Task_Details</targetReference>
+        </nextValueConnector>
         <noMoreValuesConnector>
             <targetReference>Create_Unedited_Journey_Tasks</targetReference>
         </noMoreValuesConnector>
@@ -235,8 +328,8 @@
         <name>Create_Unedited_Journey_Tasks</name>
         <label>Create Unedited Journey Tasks</label>
         <locationX>402</locationX>
-        <locationY>866</locationY>
-        <inputReference>colTemplateTasks</inputReference>
+        <locationY>1190</locationY>
+        <inputReference>colUneditedJourneyTasks</inputReference>
     </recordCreates>
     <recordLookups>
         <description>Retrieve all the Task records that are related to the selected template to be used in the creation of the Journey.</description>
@@ -434,14 +527,6 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>colNewTasks</name>
-        <dataType>SObject</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Template_Task__c</objectType>
-    </variables>
-    <variables>
         <description>Holds the collection of template task records related to the selected template.</description>
         <name>colTemplateTasks</name>
         <dataType>SObject</dataType>
@@ -449,6 +534,14 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Template_Task__c</objectType>
+    </variables>
+    <variables>
+        <name>colUneditedJourneyTasks</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task__c</objectType>
     </variables>
     <variables>
         <name>recordId</name>
@@ -460,6 +553,14 @@
     <variables>
         <description>Stores the current Template Task records data during the loop for editing before creating Journey Tasks.</description>
         <name>varCurrentTemplateTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Template_Task__c</objectType>
+    </variables>
+    <variables>
+        <name>varCurrentUneditedTemplateTask</name>
         <dataType>SObject</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
@@ -500,5 +601,13 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varUneditedJourneyTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task__c</objectType>
     </variables>
 </Flow>
