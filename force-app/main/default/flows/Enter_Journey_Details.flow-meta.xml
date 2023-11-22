@@ -215,6 +215,12 @@
     </decisions>
     <description>This flow for MainlyDigital allows the creation of Journeys from pre-existing templates. Users are able to edit the Template Tasks if they choose, otherwise the Tasks are copied as Journey Tasks with no change.</description>
     <environments>Default</environments>
+    <formulas>
+        <description>This formula generates a link for a newly created Journey so that MainlyDigital staff can view the Journey as soon as it is created.</description>
+        <name>journeyDisplayLink</name>
+        <dataType>String</dataType>
+        <expression>{!colNewJourneyTask}</expression>
+    </formulas>
     <interviewLabel>Enter Journey Details {!$Flow.CurrentDateTime}</interviewLabel>
     <label>MainlyDigital Enter Journey Details</label>
     <loops>
@@ -272,6 +278,9 @@
         <label>Create Journey Tasks from Template</label>
         <locationX>50</locationX>
         <locationY>1298</locationY>
+        <connector>
+            <targetReference>View_New_Journey</targetReference>
+        </connector>
         <inputReference>colJourneyTasks</inputReference>
     </recordCreates>
     <recordCreates>
@@ -334,6 +343,9 @@
         <label>Create Unedited Journey Tasks</label>
         <locationX>402</locationX>
         <locationY>1190</locationY>
+        <connector>
+            <targetReference>View_New_Journey</targetReference>
+        </connector>
         <inputReference>colUneditedJourneyTasks</inputReference>
     </recordCreates>
     <recordLookups>
@@ -507,6 +519,23 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
+    <screens>
+        <description>Display a link allowing users to view the newly created Journey.</description>
+        <name>View_New_Journey</name>
+        <label>View New Journey</label>
+        <locationX>226</locationX>
+        <locationY>1490</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Display_New_Journey</name>
+            <fieldText>&lt;p&gt;&lt;a href=&quot;https://power-business-6882-dev-ed.scratch.lightning.force.com/lightning/r/Journey__c/{!Create_New_Journey}/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;Journey Successfully Created &lt;/a&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <start>
         <locationX>100</locationX>
         <locationY>0</locationY>
@@ -595,14 +624,6 @@
         <description>Captures the users decision on whether to edit tasks before creating the Journey.</description>
         <name>varEditTasksDecision</name>
         <dataType>Boolean</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <description>Stores the URL to the newly created Journey record for navigation</description>
-        <name>varJourneyLink</name>
-        <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
