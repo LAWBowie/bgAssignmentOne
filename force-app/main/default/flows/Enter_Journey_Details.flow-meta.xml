@@ -2,7 +2,7 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>59.0</apiVersion>
     <assignments>
-        <description>Add the edited values into a new collection variable.</description>
+        <description>Assign the edited Journey Tasks into the new collection to be used in the creation of edited Journey Tasks.</description>
         <name>Add_To_New_Collection</name>
         <label>Add To New Collection</label>
         <locationX>138</locationX>
@@ -19,6 +19,7 @@
         </connector>
     </assignments>
     <assignments>
+        <description>Add the details for each captured Journey Task record to a new collection. To be used in the creation of the Journey Tasks.</description>
         <name>Add_To_New_Unedited_Collection</name>
         <label>Add To New Unedited Collection</label>
         <locationX>490</locationX>
@@ -35,6 +36,7 @@
         </connector>
     </assignments>
     <assignments>
+        <description>Assign the captured edits to a new Journey Task variable ready to be stored in the new collection of edited Journey Tasks.</description>
         <name>Assign_Task_Details_To_Journey_Task</name>
         <label>Assign Task Details To Journey Task</label>
         <locationX>138</locationX>
@@ -72,6 +74,7 @@
         </connector>
     </assignments>
     <assignments>
+        <description>Assign the Template Task record details to a new Journey Task variable, which will allow for the creation of Journey Tasks (as apposed to Template Tasks)</description>
         <name>Assign_Unedited_Details_To_Journey_Task</name>
         <label>Assign Unedited Details To Journey Task</label>
         <locationX>490</locationX>
@@ -109,6 +112,7 @@
         </connector>
     </assignments>
     <assignments>
+        <description>Assign the Template Task details to a temporary variable to capture the various field values for each Task in the collection.</description>
         <name>Assign_Unedited_Task_Details</name>
         <label>Assign Unedited Task Details</label>
         <locationX>490</locationX>
@@ -146,7 +150,7 @@
         </connector>
     </assignments>
     <assignments>
-        <description>Assigns the user&apos;s edits in the screen flow to the respective fields in the current Template Task.</description>
+        <description>Assigns the user&apos;s edits in the screen flow to a temporary Template Task variable to store the details for each task in the collection.</description>
         <name>Capture_Task_Edits</name>
         <label>Capture Task Edits</label>
         <locationX>138</locationX>
@@ -184,7 +188,7 @@
         </connector>
     </assignments>
     <decisions>
-        <description>Decision element with 2 paths depending on whether the user checked the &quot;edit template tasks&quot; checkbox</description>
+        <description>Decision element with 2 paths depending on whether the user checked the &quot;edit template tasks&quot; checkbox.</description>
         <name>Edit_Tasks</name>
         <label>Edit Tasks?</label>
         <locationX>226</locationX>
@@ -209,12 +213,12 @@
             <label>Yes Edit</label>
         </rules>
     </decisions>
-    <description>Screen to capture essential details for creating a new Journey.</description>
+    <description>This flow for MainlyDigital allows the creation of Journeys from pre-existing templates. Users are able to edit the Template Tasks if they choose, otherwise the Tasks are copied as Journey Tasks with no change.</description>
     <environments>Default</environments>
     <interviewLabel>Enter Journey Details {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Enter Journey Details</label>
+    <label>MainlyDigital Enter Journey Details</label>
     <loops>
-        <description>Loop element to go through each element in the collection.</description>
+        <description>Loop element to iterated through each Template Task record in the collection (If the edit checkbox has been checked).</description>
         <name>Task_Loop</name>
         <label>Task Loop</label>
         <locationX>50</locationX>
@@ -229,6 +233,7 @@
         </noMoreValuesConnector>
     </loops>
     <loops>
+        <description>Loop element to iterated through each Template Task record in the collection (If the edit checkbox is unchecked, thus no changes need to be made to the Template Tasks).</description>
         <name>Unchanged_Task_Loop</name>
         <label>Unchanged Task Loop</label>
         <locationX>402</locationX>
@@ -262,7 +267,7 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
-        <description>Creates new Journey Task records based on the edited Template Tasks.</description>
+        <description>Creates new Journey Task records by using the collection containing the edited Journey Tasks (which were previously Template Tasks).</description>
         <name>Create_Journey_Tasks_from_Template</name>
         <label>Create Journey Tasks from Template</label>
         <locationX>50</locationX>
@@ -324,7 +329,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
-        <description>Create Journey Tasks from an existing template, making no changes.</description>
+        <description>Create Journey Tasks from the new collection. These Journey Tasks will have the same values as the Template Tasks from the Template in which the user started the flow (as no changes were made).</description>
         <name>Create_Unedited_Journey_Tasks</name>
         <label>Create Unedited Journey Tasks</label>
         <locationX>402</locationX>
@@ -332,7 +337,7 @@
         <inputReference>colUneditedJourneyTasks</inputReference>
     </recordCreates>
     <recordLookups>
-        <description>Retrieve all the Task records that are related to the selected template to be used in the creation of the Journey.</description>
+        <description>Retrieve all the Template Task records that are related to the selected template to be used in the creation of the Journey. This is done by matching the previously captured Template Id to the Template field on the Template Task object. These Template tasks are then stored in a collection.</description>
         <name>Get_Related_Template_Tasks</name>
         <label>Get Related Template Tasks</label>
         <locationX>226</locationX>
@@ -358,7 +363,7 @@
         <queriedFields>Template__c</queriedFields>
     </recordLookups>
     <recordLookups>
-        <description>Get the current Template Record</description>
+        <description>Get the Id of current Template Record. This is the record where the flow starts by clicking the button &quot;new Journey&quot;.</description>
         <name>Get_Template</name>
         <label>Get Template</label>
         <locationX>226</locationX>
@@ -380,7 +385,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <screens>
-        <description>Displays the details of the current Template Task for the user to edit.</description>
+        <description>Displays the details of the current existing Template Task to allow the user to edit.</description>
         <name>Edit_Current_Template_Task</name>
         <label>Edit Current Template Task</label>
         <locationX>138</locationX>
@@ -425,7 +430,7 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
-        <description>Enter the related Journey details.</description>
+        <description>Enter the related Journey details for creating the new Journey. If a user wishes to edit the existing Tasks then they check the &quot;edit Template Tasks?&quot; box.</description>
         <name>Enter_Journey_Details</name>
         <label>Enter Journey Details</label>
         <locationX>226</locationX>
@@ -509,7 +514,7 @@
             <targetReference>Get_Template</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>colJourneyTasks</name>
         <dataType>SObject</dataType>
