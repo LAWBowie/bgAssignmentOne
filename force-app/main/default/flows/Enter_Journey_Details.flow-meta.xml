@@ -402,9 +402,9 @@
         <label>Edit Current Template Task</label>
         <locationX>138</locationX>
         <locationY>782</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
             <targetReference>Capture_Task_Edits</targetReference>
         </connector>
@@ -447,9 +447,9 @@
         <label>Enter Journey Details</label>
         <locationX>226</locationX>
         <locationY>350</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
             <targetReference>Create_New_Journey</targetReference>
         </connector>
@@ -525,9 +525,9 @@
         <label>View New Journey</label>
         <locationX>226</locationX>
         <locationY>1490</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <fields>
             <name>Display_New_Journey</name>
             <fieldText>&lt;p&gt;&lt;a href=&quot;https://power-business-6882-dev-ed.scratch.lightning.force.com/lightning/r/Journey__c/{!Create_New_Journey}/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;Journey Successfully Created &lt;/a&gt;&lt;/p&gt;</fieldText>
