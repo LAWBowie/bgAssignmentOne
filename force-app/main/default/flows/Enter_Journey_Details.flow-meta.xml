@@ -5,8 +5,8 @@
         <description>Assign the edited Journey Tasks into the new collection to be used in the creation of edited Journey Tasks.</description>
         <name>Add_To_New_Collection</name>
         <label>Add To New Collection</label>
-        <locationX>138</locationX>
-        <locationY>1106</locationY>
+        <locationX>490</locationX>
+        <locationY>1214</locationY>
         <assignmentItems>
             <assignToReference>colJourneyTasks</assignToReference>
             <operator>Add</operator>
@@ -22,8 +22,8 @@
         <description>Add the details for each captured Journey Task record to a new collection. To be used in the creation of the Journey Tasks.</description>
         <name>Add_To_New_Unedited_Collection</name>
         <label>Add To New Unedited Collection</label>
-        <locationX>490</locationX>
-        <locationY>998</locationY>
+        <locationX>842</locationX>
+        <locationY>1106</locationY>
         <assignmentItems>
             <assignToReference>colUneditedJourneyTasks</assignToReference>
             <operator>Add</operator>
@@ -39,8 +39,8 @@
         <description>Assign the captured edits to a new Journey Task variable ready to be stored in the new collection of edited Journey Tasks.</description>
         <name>Assign_Task_Details_To_Journey_Task</name>
         <label>Assign Task Details To Journey Task</label>
-        <locationX>138</locationX>
-        <locationY>998</locationY>
+        <locationX>490</locationX>
+        <locationY>1106</locationY>
         <assignmentItems>
             <assignToReference>varEditedJourneyTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -77,8 +77,8 @@
         <description>Assign the Template Task record details to a new Journey Task variable, which will allow for the creation of Journey Tasks (as apposed to Template Tasks)</description>
         <name>Assign_Unedited_Details_To_Journey_Task</name>
         <label>Assign Unedited Details To Journey Task</label>
-        <locationX>490</locationX>
-        <locationY>890</locationY>
+        <locationX>842</locationX>
+        <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>varUneditedJourneyTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -115,8 +115,8 @@
         <description>Assign the Template Task details to a temporary variable to capture the various field values for each Task in the collection.</description>
         <name>Assign_Unedited_Task_Details</name>
         <label>Assign Unedited Task Details</label>
-        <locationX>490</locationX>
-        <locationY>782</locationY>
+        <locationX>842</locationX>
+        <locationY>890</locationY>
         <assignmentItems>
             <assignToReference>varCurrentUneditedTemplateTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -153,8 +153,8 @@
         <description>Assigns the user&apos;s edits in the screen flow to a temporary Template Task variable to store the details for each task in the collection.</description>
         <name>Capture_Task_Edits</name>
         <label>Capture Task Edits</label>
-        <locationX>138</locationX>
-        <locationY>890</locationY>
+        <locationX>490</locationX>
+        <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>varCurrentTemplateTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -188,11 +188,36 @@
         </connector>
     </assignments>
     <decisions>
+        <name>Check_For_Existing_Template_Tasks</name>
+        <label>Check For Existing Template Tasks</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <defaultConnector>
+            <targetReference>Enter_Journey_Details</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Existing Template Tasks</defaultConnectorLabel>
+        <rules>
+            <name>No_Template_Tasks</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>colTemplateTasks</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>No_Tasks_Screen</targetReference>
+            </connector>
+            <label>No Template Tasks</label>
+        </rules>
+    </decisions>
+    <decisions>
         <description>Decision element with 2 paths depending on whether the user checked the &quot;edit template tasks&quot; checkbox.</description>
         <name>Edit_Tasks</name>
         <label>Edit Tasks?</label>
-        <locationX>226</locationX>
-        <locationY>566</locationY>
+        <locationX>578</locationX>
+        <locationY>674</locationY>
         <defaultConnector>
             <targetReference>Unchanged_Task_Loop</targetReference>
         </defaultConnector>
@@ -227,8 +252,8 @@
         <description>Loop element to iterated through each Template Task record in the collection (If the edit checkbox has been checked).</description>
         <name>Task_Loop</name>
         <label>Task Loop</label>
-        <locationX>50</locationX>
-        <locationY>674</locationY>
+        <locationX>402</locationX>
+        <locationY>782</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -242,8 +267,8 @@
         <description>Loop element to iterated through each Template Task record in the collection (If the edit checkbox is unchecked, thus no changes need to be made to the Template Tasks).</description>
         <name>Unchanged_Task_Loop</name>
         <label>Unchanged Task Loop</label>
-        <locationX>402</locationX>
-        <locationY>674</locationY>
+        <locationX>754</locationX>
+        <locationY>782</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -276,8 +301,8 @@
         <description>Creates new Journey Task records by using the collection containing the edited Journey Tasks (which were previously Template Tasks).</description>
         <name>Create_Journey_Tasks_from_Template</name>
         <label>Create Journey Tasks from Template</label>
-        <locationX>50</locationX>
-        <locationY>1298</locationY>
+        <locationX>402</locationX>
+        <locationY>1406</locationY>
         <connector>
             <targetReference>View_New_Journey</targetReference>
         </connector>
@@ -287,8 +312,8 @@
         <description>This element creates a new Journey record using the details provided by the user, such as the Journey Name, Candidate Information, Manager Information, and Onboarding Start Date, linking it to the Template from which the Flow was launched.</description>
         <name>Create_New_Journey</name>
         <label>Create New Journey</label>
-        <locationX>226</locationX>
-        <locationY>458</locationY>
+        <locationX>578</locationX>
+        <locationY>566</locationY>
         <connector>
             <targetReference>Edit_Tasks</targetReference>
         </connector>
@@ -341,8 +366,8 @@
         <description>Create Journey Tasks from the new collection. These Journey Tasks will have the same values as the Template Tasks from the Template in which the user started the flow (as no changes were made).</description>
         <name>Create_Unedited_Journey_Tasks</name>
         <label>Create Unedited Journey Tasks</label>
-        <locationX>402</locationX>
-        <locationY>1190</locationY>
+        <locationX>754</locationX>
+        <locationY>1298</locationY>
         <connector>
             <targetReference>View_New_Journey</targetReference>
         </connector>
@@ -352,11 +377,11 @@
         <description>Retrieve all the Template Task records that are related to the selected template to be used in the creation of the Journey. This is done by matching the previously captured Template Id to the Template field on the Template Task object. These Template tasks are then stored in a collection.</description>
         <name>Get_Related_Template_Tasks</name>
         <label>Get Related Template Tasks</label>
-        <locationX>226</locationX>
+        <locationX>314</locationX>
         <locationY>242</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Enter_Journey_Details</targetReference>
+            <targetReference>Check_For_Existing_Template_Tasks</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -378,7 +403,7 @@
         <description>Get the Id of current Template Record. This is the record where the flow starts by clicking the button &quot;new Journey&quot;.</description>
         <name>Get_Template</name>
         <label>Get Template</label>
-        <locationX>226</locationX>
+        <locationX>314</locationX>
         <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -400,8 +425,8 @@
         <description>Displays the details of the current existing Template Task to allow the user to edit.</description>
         <name>Edit_Current_Template_Task</name>
         <label>Edit Current Template Task</label>
-        <locationX>138</locationX>
-        <locationY>782</locationY>
+        <locationX>490</locationX>
+        <locationY>890</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -445,8 +470,8 @@
         <description>Enter the related Journey details for creating the new Journey. If a user wishes to edit the existing Tasks then they check the &quot;edit Template Tasks?&quot; box.</description>
         <name>Enter_Journey_Details</name>
         <label>Enter Journey Details</label>
-        <locationX>226</locationX>
-        <locationY>350</locationY>
+        <locationX>578</locationX>
+        <locationY>458</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -540,11 +565,27 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
+        <name>No_Tasks_Screen</name>
+        <label>No Tasks Screen</label>
+        <locationX>50</locationX>
+        <locationY>458</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>No_Tasks_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Please select a Template with Tasks.&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
         <description>Display a link allowing users to view the newly created Journey.</description>
         <name>View_New_Journey</name>
         <label>View New Journey</label>
-        <locationX>226</locationX>
-        <locationY>1490</locationY>
+        <locationX>578</locationX>
+        <locationY>1598</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -557,7 +598,7 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>100</locationX>
+        <locationX>188</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Template</targetReference>
