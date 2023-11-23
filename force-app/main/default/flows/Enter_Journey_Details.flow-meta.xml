@@ -222,7 +222,7 @@
         <expression>{!colNewJourneyTask}</expression>
     </formulas>
     <interviewLabel>Enter Journey Details {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>MainlyDigital Enter Journey Details</label>
+    <label>Create Journey From Template</label>
     <loops>
         <description>Loop element to iterated through each Template Task record in the collection (If the edit checkbox has been checked).</description>
         <name>Task_Loop</name>
@@ -402,7 +402,7 @@
         <label>Edit Current Template Task</label>
         <locationX>138</locationX>
         <locationY>782</locationY>
-        <allowBack>false</allowBack>
+        <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -458,14 +458,18 @@
             <dataType>String</dataType>
             <fieldText>Journey Name</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Candidate_Name</name>
             <dataType>String</dataType>
             <fieldText>Candidate Name</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Please enter a name that doesn&apos;t contain numbers or special characters.&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!Candidate_Name}, &quot;[a-zA-Z]*$&quot;)</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Candidate_Email</name>
@@ -477,6 +481,12 @@
                     <stringValue>Candidate Email</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -486,7 +496,11 @@
             <dataType>String</dataType>
             <fieldText>Manager Name</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;Please enter a name that doesn&apos;t contain numbers or special characters.&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!Manager_Name}, &quot;[a-zA-Z]*$&quot;)</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Manager_Email</name>
@@ -498,6 +512,12 @@
                     <stringValue>Manager Email</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -507,7 +527,7 @@
             <dataType>Date</dataType>
             <fieldText>Onboarding Start Date</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Edit_Template_Tasks</name>
