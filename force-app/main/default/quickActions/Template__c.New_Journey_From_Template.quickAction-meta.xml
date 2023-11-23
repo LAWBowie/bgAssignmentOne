@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Used by MainlyDigital to create a new Journey from an existing Template</description>
+    <flowDefinition>Enter_Journey_Details</flowDefinition>
+    <label>New Journey From Template</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>
