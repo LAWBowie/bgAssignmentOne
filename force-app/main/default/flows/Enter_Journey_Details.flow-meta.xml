@@ -6,7 +6,7 @@
         <name>Add_To_New_Collection</name>
         <label>Add To New Collection</label>
         <locationX>138</locationX>
-        <locationY>1706</locationY>
+        <locationY>1406</locationY>
         <assignmentItems>
             <assignToReference>colJourneyTasks</assignToReference>
             <operator>Add</operator>
@@ -23,7 +23,7 @@
         <name>Add_To_New_Unedited_Collection</name>
         <label>Add To New Unedited Collection</label>
         <locationX>490</locationX>
-        <locationY>1598</locationY>
+        <locationY>1298</locationY>
         <assignmentItems>
             <assignToReference>colUneditedJourneyTasks</assignToReference>
             <operator>Add</operator>
@@ -40,7 +40,7 @@
         <name>Assign_Task_Details_To_Journey_Task</name>
         <label>Assign Task Details To Journey Task</label>
         <locationX>138</locationX>
-        <locationY>1598</locationY>
+        <locationY>1298</locationY>
         <assignmentItems>
             <assignToReference>varEditedJourneyTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -78,7 +78,7 @@
         <name>Assign_Unedited_Details_To_Journey_Task</name>
         <label>Assign Unedited Details To Journey Task</label>
         <locationX>490</locationX>
-        <locationY>1490</locationY>
+        <locationY>1190</locationY>
         <assignmentItems>
             <assignToReference>varUneditedJourneyTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -116,7 +116,7 @@
         <name>Assign_Unedited_Task_Details</name>
         <label>Assign Unedited Task Details</label>
         <locationX>490</locationX>
-        <locationY>1382</locationY>
+        <locationY>1082</locationY>
         <assignmentItems>
             <assignToReference>varCurrentUneditedTemplateTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -154,7 +154,7 @@
         <name>Capture_Task_Edits</name>
         <label>Capture Task Edits</label>
         <locationX>138</locationX>
-        <locationY>1490</locationY>
+        <locationY>1190</locationY>
         <assignmentItems>
             <assignToReference>varCurrentTemplateTask.Name</assignToReference>
             <operator>Assign</operator>
@@ -188,40 +188,11 @@
         </connector>
     </assignments>
     <decisions>
-        <name>Continue_Journey_Creation</name>
-        <label>Continue Journey Creation</label>
-        <locationX>72</locationX>
-        <locationY>566</locationY>
-        <defaultConnector>
-            <targetReference>Enter_Journey_Details</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Continue</defaultConnectorLabel>
-        <rules>
-            <name>Do_Not_Continue</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>No_Choose_a_different_Template</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Yes_Continue</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <label>Do Not Continue</label>
-        </rules>
-    </decisions>
-    <decisions>
         <description>Decision element with 2 paths depending on whether the user checked the &quot;edit template tasks&quot; checkbox.</description>
         <name>Edit_Tasks</name>
         <label>Edit Tasks?</label>
         <locationX>226</locationX>
-        <locationY>1166</locationY>
+        <locationY>866</locationY>
         <defaultConnector>
             <targetReference>Unchanged_Task_Loop</targetReference>
         </defaultConnector>
@@ -282,7 +253,7 @@
         <name>Task_Loop</name>
         <label>Task Loop</label>
         <locationX>50</locationX>
-        <locationY>1274</locationY>
+        <locationY>974</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -297,7 +268,7 @@
         <name>Unchanged_Task_Loop</name>
         <label>Unchanged Task Loop</label>
         <locationX>402</locationX>
-        <locationY>1274</locationY>
+        <locationY>974</locationY>
         <collectionReference>colTemplateTasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -331,7 +302,7 @@
         <name>Create_Journey_Tasks_from_Template</name>
         <label>Create Journey Tasks from Template</label>
         <locationX>50</locationX>
-        <locationY>1898</locationY>
+        <locationY>1598</locationY>
         <connector>
             <targetReference>View_New_Journey</targetReference>
         </connector>
@@ -342,7 +313,7 @@
         <name>Create_New_Journey</name>
         <label>Create New Journey</label>
         <locationX>226</locationX>
-        <locationY>1058</locationY>
+        <locationY>758</locationY>
         <connector>
             <targetReference>Edit_Tasks</targetReference>
         </connector>
@@ -396,7 +367,7 @@
         <name>Create_Unedited_Journey_Tasks</name>
         <label>Create Unedited Journey Tasks</label>
         <locationX>402</locationX>
-        <locationY>1790</locationY>
+        <locationY>1490</locationY>
         <connector>
             <targetReference>View_New_Journey</targetReference>
         </connector>
@@ -455,7 +426,7 @@
         <name>Edit_Current_Template_Task</name>
         <label>Edit Current Template Task</label>
         <locationX>138</locationX>
-        <locationY>1382</locationY>
+        <locationY>1082</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -500,7 +471,7 @@
         <name>Enter_Journey_Details</name>
         <label>Enter Journey Details</label>
         <locationX>226</locationX>
-        <locationY>950</locationY>
+        <locationY>650</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -607,33 +578,20 @@
         <description>Screen which is visible to users when the template they have chosen doesn&apos;t have any Tasks.</description>
         <name>No_Tasks_Screen</name>
         <label>No Tasks Screen</label>
-        <locationX>72</locationX>
+        <locationX>94</locationX>
         <locationY>458</locationY>
-        <allowBack>false</allowBack>
+        <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
+        <allowPause>true</allowPause>
         <connector>
-            <targetReference>Continue_Journey_Creation</targetReference>
+            <targetReference>Enter_Journey_Details</targetReference>
         </connector>
         <fields>
             <name>No_Tasks_Display</name>
             <fieldText>&lt;p&gt;This Template Currently has no Tasks, would you like to continue making a Journey with no Tasks?&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
-        <fields>
-            <name>Yes_Continue</name>
-            <dataType>Boolean</dataType>
-            <fieldText>Yes, Continue.</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>No_Choose_a_different_Template</name>
-            <dataType>Boolean</dataType>
-            <fieldText>No, Choose a different Template.</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
+        <nextOrFinishButtonLabel>Continue</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
@@ -642,7 +600,7 @@
         <name>View_New_Journey</name>
         <label>View New Journey</label>
         <locationX>226</locationX>
-        <locationY>2090</locationY>
+        <locationY>1790</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
