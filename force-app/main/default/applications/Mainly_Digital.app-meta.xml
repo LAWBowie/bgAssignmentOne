@@ -14,7 +14,6 @@
     <navType>Standard</navType>
     <tabs>Template__c</tabs>
     <tabs>Journey__c</tabs>
-    <tabs>Create_Journey_from_Template</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Mainly_Digital_UtilityBar</utilityBar>
 </CustomApplication>
