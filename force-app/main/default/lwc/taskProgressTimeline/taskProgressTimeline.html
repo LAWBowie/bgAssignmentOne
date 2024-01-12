@@ -1,29 +1,15 @@
 <template>
-    <lightning-modal-header>
-        Timeline goes here
+    <lightning-modal-header class="modal-header">
+        Task Timeline
     </lightning-modal-header>
     <div class="timeline">
-        <template for:each={tasks.data} for:item="task">
-            <!-- Render if task is In Progress -->
-            <template if:true={task.isInProgress}>
-                <div key={task.Id} class="yellow">
-                    {task.Name} - Due: {task.Estimated_Completion_Date__c}
-                </div>
-            </template>
-
-            <!-- Render if task is Complete -->
-            <template if:true={task.isComplete}>
-                <div key={task.Id} class="green">
-                    {task.Name} - Due: {task.Estimated_Completion_Date__c}
-                </div>
-            </template>
-
-            <!-- Render if task is Overdue -->
-            <template if:true={task.isOverdue}>
-                <div key={task.Id} class="red">
-                    {task.Name} - Due: {task.Estimated_Completion_Date__c}
-                </div>
-            </template>
+        <template for:each={tasks} for:item="task">
+            <div key={task.Id} class={task.cssClass}>
+                <div class="task-text">
+                {task.Name} - Due: {task.Estimated_Completion_Date__c} ({task.Completion_Status__c})
+            </div>
+            </div>
         </template>
     </div>
 </template>
+

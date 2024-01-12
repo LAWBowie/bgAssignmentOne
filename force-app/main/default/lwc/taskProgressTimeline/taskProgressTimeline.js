@@ -3,17 +3,39 @@ import getTasksByJourneyId from '@salesforce/apex/mdFetchTasks.getTasksByJourney
 
 export default class TaskProgressTimeline extends LightningElement {
     @api recordId;
-    tasks = [];
+    tasks;
 
     @wire(getTasksByJourneyId, { journeyId: '$recordId' })
-    wiredTasks({ data }) {
+    wiredTasks({ error, data }) {
         if (data) {
+            console.log(data); //Check data in browser console
             this.tasks = data.map(task => ({
                 ...task,
-                isInProgress: task.Completion_Status__c === 'In Progress',
-                isComplete: task.Completion_Status__c === 'Complete',
-                isOverdue: task.Completion_Status__c === 'Overdue'
+                cssClass: this.getStatusClass(task.Completion_Status__c)
             }));
+        } else if (error){
+            console.error('Error retrieving tasks:', error);
+        }
+    }
+
+    getStatusClass(status) {
+        switch (status) {
+            case 'In Progress':
+                return 'yellow';
+            case 'Complete':
+                return 'green';
+            case 'Overdue':
+                return 'red';
+            default:
+                return '';
         }
     }
 }
+
+
+
+
+
+
+
+
