@@ -1,0 +1,17 @@
+/* Styling for reminder box  */
+.reminder-box {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: white;
+    border-radius: 4px;
+    margin-bottom: 1rem; 
+    max-width: 100%; 
+    box-sizing: border-box;
+}
+
+.reminder-text {
+    color: black;
+    font-size: 14px; 
+}

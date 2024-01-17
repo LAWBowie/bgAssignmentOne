@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+//import { createElement } from 'lwc';
 import UpdateJourneyStartDate from 'c/updateJourneyStartDate';
 
 describe('c-update-journey-start-date', () => {
