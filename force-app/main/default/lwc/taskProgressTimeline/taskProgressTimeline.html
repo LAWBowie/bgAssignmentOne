@@ -1,7 +1,8 @@
 <template>
-    <lightning-modal-header class="modal-header">
-        Task Timeline
-    </lightning-modal-header>
+    <div class="header-section">
+        <h2 class="task-timeline-heading">Task Timeline</h2>
+        <div class="onboarding-date">Onboarding Start Date: {onboardingStartDate}</div>
+    </div>
     <div class="timeline">
         <template for:each={tasks} for:item="task">
             <div key={task.Id} class={task.cssClass}>

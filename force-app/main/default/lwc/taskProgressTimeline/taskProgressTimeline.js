@@ -1,5 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import getTasksByJourneyId from '@salesforce/apex/mdFetchTasks.getTasksByJourneyId';
+import Onboarding_Start_Date__c from '@salesforce/schema/Journey__c.Onboarding_Start_Date__c';
+import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 
 export default class TaskProgressTimeline extends LightningElement {
     @api recordId;
@@ -15,6 +17,15 @@ export default class TaskProgressTimeline extends LightningElement {
             }));
         } else if (error){
             console.error('Error retrieving tasks:', error);
+        }
+    }
+
+    @wire(getRecord, { recordId: '$recordId', fields: [Onboarding_Start_Date__c] })
+    wiredRecord({ error, data }) {
+        if (data) {
+            this.onboardingStartDate = getFieldValue(data, Onboarding_Start_Date__c);
+        } else if (error) {
+            console.error('Error retrieving Onboarding Start Date:', error);
         }
     }
 
