@@ -1,7 +1,7 @@
 <template>
+    <lightning-card title="Task Timeline">
     <div class="header-section">
-        <h2 class="task-timeline-heading">Task Timeline</h2>
-        <div class="onboarding-date">Onboarding Start Date: {onboardingStartDate}</div>
+        <p class="onboarding-date">Onboarding Start Date: {onboardingStartDate}</p>
     </div>
     <div class="timeline">
         <template for:each={tasks} for:item="task">
@@ -12,5 +12,6 @@
             </div>
         </template>
     </div>
+</lightning-card>
 </template>
 
