@@ -6,11 +6,17 @@ import { refreshApex } from '@salesforce/apex';
 import Journey__c from '@salesforce/schema/Journey__c';
 import Onboarding_Start_Date__c from '@salesforce/schema/Journey__c.Onboarding_Start_Date__c';
 import ID_field from '@salesforce/schema/Journey__c.Id';
-
+import successMessage from '@salesforce/label/c.task_Update_Success_Message';
+import errorMessage from '@salesforce/label/c.task_Update_Error_Message';
 
 export default class UpdateOnboardingStartDate extends LightningElement {
     @api recordId;
     userInput;
+
+    labels={
+        successMessage,
+        errorMessage
+    };
     
 
     handleChange(event){
@@ -37,7 +43,7 @@ export default class UpdateOnboardingStartDate extends LightningElement {
             console.log(JSON.stringify(result));
             this.dispatchEvent(new ShowToastEvent({
                 title: 'Success',
-                message: 'Onboarding start date updated, tasks will be recalculated.',
+                message: this.labels.successMessage,
                 variant: 'success'
             }));
         })

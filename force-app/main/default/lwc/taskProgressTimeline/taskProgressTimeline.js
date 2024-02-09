@@ -2,10 +2,20 @@ import { LightningElement, api, wire } from 'lwc';
 import getTasksByJourneyId from '@salesforce/apex/mdFetchTasks.getTasksByJourneyId';
 import Onboarding_Start_Date__c from '@salesforce/schema/Journey__c.Onboarding_Start_Date__c';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import taskTimelineTitle from '@salesforce/label/c.Task_Timeline_Title';
+import onboardingStartDateLabel from '@salesforce/label/c.Onboarding_Start_Date_Label';
+import dueLabel from '@salesforce/label/c.due_Label';
+
+
 
 export default class TaskProgressTimeline extends LightningElement {
     @api recordId;
     tasks;
+    labels={
+        taskTimelineTitle,
+        onboardingStartDateLabel,
+        dueLabel
+    };
 
     @wire(getTasksByJourneyId, { journeyId: '$recordId' })
     wiredTasks({ error, data }) {
