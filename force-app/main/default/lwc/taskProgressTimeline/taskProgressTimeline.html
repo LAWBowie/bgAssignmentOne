@@ -1,0 +1,18 @@
+<template>
+    <lightning-card>
+    <div class="header-section">
+        <h1 class="task-timeline-heading">{labels.taskTimelineTitle}</h1>
+        <p class="onboarding-date">{labels.onboardingStartDateLabel} {onboardingStartDate}</p>
+    </div>
+    <div class="timeline">
+        <template for:each={tasks} for:item="task">
+            <div key={task.Id} class={task.cssClass}>
+                <div class="task-text">
+                {task.Name} {labels.dueLabel} {task.Estimated_Completion_Date__c} ({task.Completion_Status__c})
+            </div>
+            </div>
+        </template>
+    </div>
+</lightning-card>
+</template>
+

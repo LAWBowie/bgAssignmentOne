@@ -4,8 +4,9 @@
     <defaultValue>TODAY()</defaultValue>
     <description>The start date of the candidates onboarding.</description>
     <externalId>false</externalId>
+    <inlineHelpText>Please ensure you refresh the page if you change the original start date.</inlineHelpText>
     <label>Onboarding Start Date</label>
-    <required>true</required>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>

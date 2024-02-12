@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Task_Timeline_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Value of the Task Timeline Title</shortDescription>
+        <value>Task Timeline</value>
+    </labels>
+    <labels>
+        <fullName>onboarding_Start_Date_Label</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text value of the Onboarding Start Date component</shortDescription>
+        <value>Onboarding Start Date:</value>
+    </labels>
+    <labels>
+        <fullName>task_Update_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Value of the toast error message following an unsuccessful update.</shortDescription>
+        <value>Error updating tasks, please try again.</value>
+    </labels>
+    <labels>
+        <fullName>task_Update_Success_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text value of the success toast message</shortDescription>
+        <value>Onboarding start date updated, task dates will be recalculated.</value>
+    </labels>
+    <labels>
+        <fullName>due_Label</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text value between the task name and due date</shortDescription>
+        <value>- Due:</value>
+    </labels>
+</CustomLabels>
